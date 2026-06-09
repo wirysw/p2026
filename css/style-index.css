@@ -1,0 +1,283 @@
+:root {
+    --bg-color: #f3f4f6;
+    --card-bg: #ffffff;
+    --text-main: #1f2937;
+    --accent-blue: #0044ff;
+    --border-radius: 24px;
+    --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    font-family: var(--font-stack);
+    color: var(--text-main);
+    line-height: 1.5;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid #e5e7eb;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.main-nav a, .dropbtn {
+    color: #4b5563;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.main-nav a:hover, .main-nav a.active, .dropdown:hover .dropbtn {
+    color: #000000;
+    border-bottom: 3px solid var(--accent-blue);
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--card-bg);
+    min-width: 220px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    top: 40px;
+}
+
+.dropdown-content a {
+    color: var(--text-main);
+    padding: 12px 16px;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--bg-color);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Layout Container */
+.profile-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 40px;
+    padding: 0 20px;
+}
+
+/* Coloana Stângă - Tema Închisă */
+.left-hero {
+    background-color: #0d0d0d;
+    border-radius: var(--border-radius);
+    color: white;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    height: fit-content;
+}
+
+.hello-text {
+    font-size: 1.4rem;
+    color: #9ca3af;
+}
+
+.hero-name {
+    font-size: 2.5rem;
+    margin: 5px 0 0 0;
+    font-weight: 400;
+}
+
+.highlight-name {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+/* Stilizare Mască Container pentru Imagine */
+.photo-placeholder {
+    background: #1a1a1a;
+    border-radius: 16px;
+    height: 450 px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Împiedică imaginea să depășească marginile rotunjite */
+}
+
+/* Controlul imaginii propriu-zise */
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Protejează aspectul imaginii împotriva distorsionării */
+    display: block;
+}
+
+.personal-info-box h3 {
+    border-bottom: 1px solid #27272a;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    color: #f3f4f6;
+}
+
+.personal-info-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.personal-info-box li {
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #d1d5db;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+/* Coloana Dreaptă */
+.info-section {
+    margin-bottom: 35px;
+}
+
+.info-section h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #111111;
+}
+
+.card-gray {
+    background-color: #eaeaea;
+    border: 1px solid #d1d5db;
+    border-radius: var(--border-radius);
+    padding: 30px;
+}
+
+.specialty-text {
+    font-weight: 700;
+    color: var(--accent-blue);
+    margin-top: -5px;
+}
+
+.card-white {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+/* Liste geometrice fără iconițe sau emoji-uri */
+.clean-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.clean-list li {
+    margin-bottom: 15px;
+    font-size: 15px;
+    position: relative;
+    padding-left: 15px;
+}
+
+.clean-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    background-color: #111111;
+    border-radius: 50%;
+}
+
+.styled-dots li::before {
+    background-color: var(--accent-blue);
+}
+
+.semester-box h4 {
+    margin: 0 0 10px 5px;
+    color: #4b5563;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* Zonă Buton Document */
+.download-zone {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #d1d5db;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.doc-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #4b5563;
+}
+
+.download-btn {
+    display: inline-block;
+    background-color: #111111;
+    color: white;
+    text-decoration: none;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    transition: background 0.2s;
+    border: 1px solid #111111;
+}
+
+.download-btn:hover {
+    background-color: transparent;
+    color: #111111;
+}
+
+.final-goal {
+    margin-top: 20px;
+    border-left: 4px solid var(--accent-blue);
+    padding-left: 15px;
+    color: #4b5563;
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}

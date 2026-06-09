@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cap. 3 - Implementare Cod Sursă</title>
+    <link rel="stylesheet" href="css/style-index.css">
+    <link rel="stylesheet" href="css/style-probleme.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <nav class="main-nav">
+                <a href="index.html">Pagina Principală</a>
+                <a href="planificare.html">Cap. 1 Planificare</a>
+                <a href="unitate-invatare.html">Cap. 2 Unitatea de Învățare</a>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn active">Cap. 3 Rezolvarea Problemei ▾</a>
+                    <div class="dropdown-content">
+                        <a href="problema-conditie.html">Condiția problemei</a>
+                        <a href="problema-implementare.html">Implementarea în C++/C#</a>
+                        <a href="problema-rezultat.html">Rezultatul execuției</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <h1>Implementarea Algoritmilor în Limbaje de Programare</h1>
+        
+        <div class="problem-card">
+            <div class="problem-badge">M1.7 - C++</div>
+            <h2 class="problem-title">Cod Sursă - Ecuația Bazei de Numerație</h2>
+            <div class="code-wrapper">
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+long long convertesteInBaza10(string a, long long x, long long b) {
+    long long valoare = 0;
+    long long putere = 1; 
+
+    for(int i = a.length() - 1; i &gt;= 0; i--) {
+        int cifra = a[i] - '0';
+        if (b - valoare &lt; cifra * putere) return b + 1;
+        valoare += cifra * putere;
+        
+        if (i &gt; 0) {
+            if (b / x &lt; putere) return b + 1;
+            putere *= x;
+        }
+    }
+    return valoare;
+} 
+
+int main() {
+    string a;
+    long long b;
+    cout << "Introdu nr a: "; cin >> a; 
+    cout << "Introdu nr b: "; cin >> b; 
+    
+    int cifra_maxima = 0;
+    for(int i = 0; i < a.length(); i++) {
+       int cifra_curenta = a[i] - '0';
+       if (cifra_curenta > cifra_maxima) cifra_maxima = cifra_curenta;
+    }
+    
+    long long baza_start = cifra_maxima + 1;
+    if (baza_start < 2) baza_start = 2;
+
+    if (a.length() == 1) {
+       long long valoare_cifra = a[0] - '0';
+       if (valoare_cifra == b) {
+            cout << "-> Radacina ecuatiei (" << a << ")_x = " << b << " este orice x >= " << baza_start << endl;
+       } else {
+            cout << "Ecuatia (" << a << ")_x = " << b << " Nu are solutii." << endl;
+       }
+       return 0;
+    }
+    
+    long long solutie = -1;
+    long long limita_sus = b;
+    
+    for (long long x = baza_start; x <= limita_sus; x++) {
+        long long valoare_zecimala = convertesteInBaza10(a, x, b);
+        if (valoare_zecimala == b) { solutie = x; break; }
+        if (valoare_zecimala > b) break;
+    }
+
+    if (solutie != -1) cout << "-> Radacina ecuatiei (" << a << ")_x = " << b << " este x = " << solutie << endl;
+    else cout << "Ecuatia (" << a << ")_x = " << b << " Nu are solutii." << endl;
+    return 0;
+}</code></pre>
+            </div>
+            <div class="complexity-box">
+                <strong>Estimarea Complexității Temporale:</strong> Cazul cel mai defavorabil (Worst-Case) are complexitatea <strong>O(b * |a|)</strong>, unde <em>b</em> reprezintă limita superioară de verificare a bazei, iar <em>|a|</em> reprezintă numărul de cifre ale șirului. Datorită optimizării prin oprire timpurie strict monotonă (`valoare_zecimala > b`), complexitatea practică este mult mai mică.
+            </div>
+        </div>
+
+        <div class="problem-card">
+            <div class="problem-badge">M2.11 - C++</div>
+            <h2 class="problem-title">Cod Sursă - Gestiune Stații (Greedy)</h2>
+            <div class="code-wrapper">
+<pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int main() {
+    ifstream fin("date.in");
+    ofstream fout("date.out");
+    int n, x;
+    if (!(fin >> n >> x)) return 0;
+
+    vector&lt;int&gt; a(n);
+    for (int i = 1; i &lt;= n - 1; i++) fin &gt;&gt; a[i];
+
+    vector&lt;int&gt; statii_alese;
+    statii_alese.push_back(1);
+    int distanta_acumulata = 0;
+
+    for (int i = 1; i &lt;= n - 1; i++) {
+        distanta_acumulata += a[i];
+        if (distanta_acumulata &gt;= x) {
+            statii_alese.push_back(i + 1);
+            distanta_acumulata = 0;
+        }
+    }
+
+    fout &lt;&lt; statii_alese.size() &lt;&lt; "\n";
+    for (size_t i = 0; i &lt; statii_alese.size(); i++) {
+        fout &lt;&lt; statii_alese[i];
+        if (i &lt; statii_alese.size() - 1) fout &lt;&lt; " ";
+    }
+    fout &lt;&lt; "\n";
+    fin.close(); fout.close();
+    return 0;
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="problem-card">
+            <div class="problem-badge">M3.11 - C++</div>
+            <h2 class="problem-title">Cod Sursă - Partițiile unui Număr</h2>
+            <div class="code-wrapper">
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int p[100]; 
+
+void afisare(int n, int k) {
+    cout &lt;&lt; n &lt;&lt; " = ";
+    for (int i = 1; i &lt;= k; i++) {
+        cout &lt;&lt; p[i];
+        if (i &lt; k) cout &lt;&lt; "+";
+    }
+    cout &lt;&lt; "\n";
+}
+
+void partitioneaza(int n_initial, int n_ramas, int k) {
+    if (n_ramas == 0) {
+        afisare(n_initial, k - 1);
+        return;
+    }
+    int start = 1;
+    if (k &gt; 1) start = p[k - 1];
+
+    for (int i = start; i &lt;= n_ramas; i++) {
+        p[k] = i;
+        partitioneaza(n_initial, n_ramas - i, k + 1); 
+    }
+}
+
+int main() {
+    int n;
+    cout &lt;&lt; "Introduceți n: "; cin &gt;&gt; n;
+    if (n &lt;= 0) cout &lt;&lt; "Numărul trebuie să fie strict pozitiv.\n";
+    else partitioneaza(n, n, 1);
+    return 0;
+}</code></pre>
+
+<h3>1. M3.29: Canibalii și Misionarii (C++)</h3>
+        <pre><code>#include <iostream>
+
+using namespace std;
+
+int M_TOTAL, C_TOTAL;
+int istoric_m[100];
+int istoric_c[100];
+int istoric_barca[100];
+
+bool este_valid(int m_stang, int c_stang) {
+    int m_drept = M_TOTAL - m_stang;
+    int c_drept = C_TOTAL - c_stang;
+
+    if (m_stang < 0 || m_stang > M_TOTAL || c_stang < 0 || c_stang > C_TOTAL) {
+        return false;
+    }
+    if (m_stang > 0 && c_stang > m_stang) return false; // Misionarii de pe malul stâng sunt în pericol
+    if (m_drept > 0 && c_drept > m_drept) return false; // Misionarii de pe malul drept sunt în pericol
+
+    return true;
+}
+
+bool deja_vizitat(int m_stang, int c_stang, int barca, int k) {
+    for (int i = 1; i < k; i++) {
+        if (istoric_m[i] == m_stang && istoric_c[i] == c_stang && istoric_barca[i] == barca) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void afisare_solutie(int k) {
+    cout << "--- Solutie Noua ---\n";
+    for (int i = 1; i <= k; i++) {
+        int m_dr = M_TOTAL - istoric_m[i];
+        int c_dr = C_TOTAL - istoric_c[i];
+        
+        cout << "Pasul " << i << ": Mal Stang (M:" << istoric_m[i] << " C:" << istoric_c[i] << ") ";
+        if (istoric_barca[i] == 1) cout << " <-[Barca]- ";
+        else cout << " -[Barca]-> ";
+        cout << "Mal Drept (M:" << m_dr << " C:" << c_dr << ")\n";
+    }
+    cout << "\n";
+}
+
+void traverseaza(int m_stang, int c_stang, int barca, int k) {
+    istoric_m[k] = m_stang;
+    istoric_c[k] = c_stang;
+    istoric_barca[k] = barca;
+
+    if (m_stang == 0 && c_stang == 0) {
+        afisare_solutie(k);
+        return;
+    }
+
+    for (int m_barca = 0; m_barca <= 2; m_barca++) {
+        for (int c_barca = 0; c_barca <= 2; c_barca++) {
+            if (m_barca + c_barca >= 1 && m_barca + c_barca <= 2) {
+                int urmator_m, urmator_c, urmator_barca;
+
+                if (barca == 1) { // Barca pleacă de pe malul stâng
+                    urmator_m = m_stang - m_barca;
+                    urmator_c = c_stang - c_barca;
+                    urmator_barca = 2;
+                } else {          // Barca revine de pe malul drept
+                    urmator_m = m_stang + m_barca;
+                    urmator_c = c_stang + c_barca;
+                    urmator_barca = 1;
+                }
+
+                if (este_valid(urmator_m, urmator_c)) {
+                    if (!deja_vizitat(urmator_m, urmator_c, urmator_barca, k + 1)) {
+                        traverseaza(urmator_m, urmator_c, urmator_barca, k + 1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+int main() {
+    cout << "Introduceti numarul de misionari: "; cin >> M_TOTAL;
+    cout << "Introduceti numarul de canibali: "; cin >> C_TOTAL;
+
+    if (!este_valid(M_TOTAL, C_TOTAL)) {
+        cout << "Starea initiala este invalida.\n";
+    } else {
+        traverseaza(M_TOTAL, C_TOTAL, 1, 1);
+    }
+    return 0;
+}</code></pre>
+
+        <h3>2. M4.11: Generarea Permutărilor (C++)</h3>
+        <pre><code>#include <iostream>
+
+using namespace std;
+
+int x[100];
+int n;
+
+void afisare() {
+    for (int i = 1; i <= n; i++) {
+        cout << x[i] << " ";
+    }
+    cout << "\n";
+}
+
+void permutari(int k) {
+    if (k == n) {
+        afisare();
+        return;
+    }
+
+    for (int i = k; i <= n; i++) {
+        // Interschimbare (Swap) pentru fixarea elementului curent pe poziția k
+        int aux = x[k];
+        x[k] = x[i];
+        x[i] = aux;
+
+        permutari(k + 1);
+
+        // Revenire (Backtrack) - repunem elementul la locul lui initial
+        aux = x[k];
+        x[k] = x[i];
+        x[i] = aux;
+    }
+}
+
+int main() {
+    cout << "Introduceti n: "; cin >> n;
+
+    cout << "Introduceti elementele multimii:\n";
+    for (int i = 1; i <= n; i++) {
+        cin >> x[i];
+    }
+
+    cout << "Permutarile multimii sunt:\n";
+    permutari(1);
+
+    return 0;
+}</code></pre>
+
+        <h3>3. M5.15: Suma Vectorilor (C++)</h3>
+        <pre><code>#include <iostream>
+
+using namespace std;
+
+int v[100];
+
+int suma_dei(int stang, int drept) {
+    // Cazul de bază: subproblema are un singur element
+    if (stang == drept) {
+        return v[stang];
+    }
+
+    // Etapa Divide: Împărțim problema în două subprobleme simetrice
+    int mijloc = (stang + drept) / 2;
+
+    // Etapa Impera: Rezolvăm subproblemele în mod recursiv
+    int suma_stanga = suma_dei(stang, mijloc);
+    int suma_dreapta = suma_dei(mijloc + 1, drept);
+
+    // Etapa Combină: Combinăm rezultatele parțiale
+    return suma_stanga + suma_dreapta;
+}
+
+int main() {
+    int n;
+    cout << "Introduceti numarul de elemente n: "; cin >> n;
+
+    cout << "Introduceti elementele vectorului:\n";
+    for (int i = 1; i <= n; i++) {
+        cin >> v[i];
+    }
+
+    int rezultat = suma_dei(1, n);
+    cout << "Suma elementelor este: " << rezultat << "\n";
+
+    return 0;
+}</code></pre>
+
+        <h3>4. M6.11: Suma Maximă în Triunghi (C++)</h3>
+        <pre><code>#include <iostream>
+
+using namespace std;
+
+int a[101][101];
+int dp[101][101];
+int drum[101];
+
+int main() {
+    int n;
+    cout << "Introduceti n: "; cin >> n;
+
+    cout << "Introduceti elementele triunghiului:\n";
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= i; j++) {
+            cin >> a[i][j];
+        }
+    }
+
+    // Inițializarea bazei matricei DP cu ultima linie din triunghi
+    for (int j = 1; j <= n; j++) {
+        dp[n][j] = a[n][j];
+    }
+
+    // Abordarea Bottom-Up (de jos în sus)
+    for (int i = n - 1; i >= 1; i--) {
+        for (int j = 1; j <= i; j++) {
+            if (dp[i + 1][j] > dp[i + 1][j + 1]) {
+                dp[i][j] = a[i][j] + dp[i + 1][j];
+            } else {
+                dp[i][j] = a[i][j] + dp[i + 1][j + 1];
+            }
+        }
+    }
+
+    cout << "Suma maxima este " << dp[1][1] << "\n";
+
+    // Reconstrucția drumului optim de sus în jos
+    int j = 1;
+    drum[1] = a[1][1];
+    for (int i = 1; i < n; i++) {
+        if (dp[i + 1][j] > dp[i + 1][j + 1]) {
+            drum[i + 1] = a[i + 1][j];
+        } else {
+            j = j + 1;
+            drum[i + 1] = a[i + 1][j];
+        }
+    }
+
+    cout << "Valorile din care se obtine suma maxima sunt: ";
+    for (int i = 1; i <= n; i++) {
+        cout << drum[i] << " ";
+    }
+    cout << "\n";
+
+    return 0;
+}</code></pre>
+
+        <h3>5. M6.16: Subșir Crescător Maximal (C++)</h3>
+        <pre><code>#include <iostream>
+using namespace std;
+
+int v[101];
+int dp[101];
+int tata[101];
+int solutie[101];
+
+int main() {
+    int n;
+    cout << "Introduceti n: "; cin >> n;
+
+    cout << "Introduceti elementele sirului:\n";
+    for (int i = 1; i <= n; i++) {
+        cin >> v[i];
+    }
+
+    for (int i = 1; i <= n; i++) {
+        dp[i] = 1;
+        tata[i] = 0;
+    }
+
+    // Calculul dinamic al lungimilor
+    for (int i = 2; i <= n; i++) {
+        for (int j = 1; j < i; j++) {
+            if (v[j] < v[i] && dp[j] + 1 > dp[i]) {
+                dp[i] = dp[j] + 1;
+                tata[i] = j; // Reținem legătura către elementul precedent
+            }
+        }
+    }
+
+    int lungime_maxima = dp[1];
+    int pozitie_finala = 1;
+
+    for (int i = 2; i <= n; i++) {
+        if (dp[i] > lungime_maxima) {
+            lungime_maxima = dp[i];
+            pozitie_finala = i;
+        }
+    }
+
+    // Reconstrucția subșirului de la sfârșit spre început
+    int k = 0;
+    int curent = pozitie_finala;
+    while (curent != 0) {
+        k++;
+        solutie[k] = v[curent];
+        curent = tata[curent];
+    }
+
+    cout << "Subsirul crescator maximal este:\n";
+    for (int i = k; i >= 1; i--) {
+        cout << solutie[i] << " ";
+    }
+    cout << "\n";
+
+    return 0;
+}</code></pre>
+
+        <h3>6. POO 1: Evaluare Studenți (C#)</h3>
+        <pre><code>using System;
+
+namespace EvaluareStudenti
+{
+    class Student
+    {
+        private string nume;
+        private int[] note;
+        private string[] materii;
+        private int nrMaterii;
+
+        public string Nume { get { return nume; } }
+
+        public Student(string nume, int capacitateMaterii)
+        {
+            this.nume = nume;
+            this.note = new int[capacitateMaterii];
+            this.materii = new string[capacitateMaterii];
+            this.nrMaterii = 0;
+        }
+
+        public void AdaugaNota(string materie, int nota)
+        {
+            materii[nrMaterii] = materie;
+            note[nrMaterii] = nota;
+            nrMaterii++;
+        }
+
+        public double CalculeazaMedia()
+        {
+            if (nrMaterii == 0) return 0;
+            double suma = 0;
+            for (int i = 0; i < nrMaterii; i++) { suma += note[i]; }
+            return suma / nrMaterii;
+        }
+
+        public int NumarRestante()
+        {
+            int restante = 0;
+            for (int i = 0; i < nrMaterii; i++)
+            {
+                if (note[i] < 5) restante++;
+            }
+            return restante;
+        }
+
+        public bool EsteAbsolvent() { return NumarRestante() == 0; }
+
+        public int ObtineNotaMaterie(string materie)
+        {
+            for (int i = 0; i < nrMaterii; i++)
+            {
+                if (materii[i].Equals(materie, StringComparison.OrdinalIgnoreCase))
+                    return note[i];
+            }
+            return 0;
+        }
+
+        public void AfiseazaInfo()
+        {
+            Console.WriteLine($"Student: {nume} | Medie: {CalculeazaMedia():F2} | Restante: {NumarRestante()}");
+        }
+    }
+
+    class GestiuneStudenti
+    {
+        private Student[] studenti;
+        private int nrStudenti;
+
+        public GestiuneStudenti(int capacitate)
+        {
+            studenti = new Student[capacitate];
+            nrStudenti = 0;
+        }
+
+        public void AdaugaStudent(Student s)
+        {
+            if (nrStudenti < studenti.Length) { studenti[nrStudenti++] = s; }
+        }
+
+        public void AfiseazaTotiStudentii()
+        {
+            Console.WriteLine("\n--- Lista tuturor studentilor ---");
+            for (int i = 0; i < nrStudenti; i++) { studenti[i].AfiseazaInfo(); }
+        }
+
+        public void ClasificaAbsolventiSiRepetenti()
+        {
+            Console.WriteLine("\n--- Studenti Absolventi ---");
+            for (int i = 0; i < nrStudenti; i++) { if (studenti[i].EsteAbsolvent()) studenti[i].AfiseazaInfo(); }
+
+            Console.WriteLine("\n--- Studenti Repetenti ---");
+            for (int i = 0; i < nrStudenti; i++) { if (!studenti[i].EsteAbsolvent()) studenti[i].AfiseazaInfo(); }
+        }
+
+        public int NumarStudentiCuMedieMaiMare(double medieData)
+        {
+            int count = 0;
+            for (int i = 0; i < nrStudenti; i++) { if (studenti[i].CalculeazaMedia() > medieData) count++; }
+            return count;
+        }
+
+        public void OrdoneazaDupaMedie()
+        {
+            for (int i = 0; i < nrStudenti - 1; i++)
+                for (int j = i + 1; j < nrStudenti; j++)
+                    if (studenti[i].CalculeazaMedia() < studenti[j].CalculeazaMedia())
+                        { Student aux = studenti[i]; studenti[i] = studenti[j]; studenti[j] = aux; }
+            Console.WriteLine("\n--- Studenti ordonati descrescator dupa medie ---");
+            AfiseazaTotiStudentii();
+        }
+
+        public void AfiseazaBursieri(double medieMinimaBursa)
+        {
+            Console.WriteLine($"\n--- Studenti Bursieri (Medie >= {medieMinimaBursa} si 0 restante) ---");
+            for (int i = 0; i < nrStudenti; i++)
+                if (studenti[i].EsteAbsolvent() && studenti[i].CalculeazaMedia() >= medieMinimaBursa)
+                    studenti[i].AfiseazaInfo();
+        }
+
+        public void ClasificaDupaRestante()
+        {
+            for (int i = 0; i < nrStudenti - 1; i++)
+                for (int j = i + 1; j < nrStudenti; j++)
+                    if (studenti[i].NumarRestante() < studenti[j].NumarRestante())
+                        { Student aux = studenti[i]; studenti[i] = studenti[j]; studenti[j] = aux; }
+            Console.WriteLine("\n--- Studenti clasati dupa numarul de restante (descrescator) ---");
+            AfiseazaTotiStudentii();
+        }
+
+        public void OrdoneazaDupaNotaMaterie(string materie)
+        {
+            for (int i = 0; i < nrStudenti - 1; i++)
+                for (int j = i + 1; j < nrStudenti; j++)
+                    if (studenti[i].ObtineNotaMaterie(materie) < studenti[j].ObtineNotaMaterie(materie))
+                        { Student aux = studenti[i]; studenti[i] = studenti[j]; studenti[j] = aux; }
+            Console.WriteLine($"\n--- Studenti ordonati dupa nota la materia: {materie} ---");
+            for (int i = 0; i < nrStudenti; i++)
+                Console.WriteLine($"Student: {studenti[i].Nume} | Nota la {materie}: {studenti[i].ObtineNotaMaterie(materie)}");
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            GestiuneStudenti facultate = new GestiuneStudenti(5);
+            // Instanțiere și adăugare obiecte studenți...
+            Student s1 = new Student("Ionescu Andrei", 3); s1.AdaugaNota("Matematica", 9); s1.AdaugaNota("Informatica", 10); s1.AdaugaNota("Fizica", 8);
+            Student s2 = new Student("Popescu Maria", 3); s2.AdaugaNota("Matematica", 4); s2.AdaugaNota("Informatica", 7); s2.AdaugaNota("Fizica", 5);
+            Student s3 = new Student("Vasilescu Dan", 3); s3.AdaugaNota("Matematica", 3); s3.AdaugaNota("Informatica", 4); s3.AdaugaNota("Fizica", 6);
+            Student s4 = new Student("Georgescu Ana", 3); s4.AdaugaNota("Matematica", 10); s4.AdaugaNota("Informatica", 9); s4.AdaugaNota("Fizica", 10);
+
+            facultate.AdaugaStudent(s1); facultate.AdaugaStudent(s2); facultate.AdaugaStudent(s3); facultate.AdaugaStudent(s4);
+            facultate.AfiseazaTotiStudentii();
+            facultate.ClasificaAbsolventiSiRepetenti();
+            facultate.OrdoneazaDupaMedie();
+            facultate.OrdoneazaDupaNotaMaterie("Matematica");
+            Console.ReadLine();
+        }
+    }
+}</code></pre>
+
+        <h3>7. POO 2: Gestiune Rezervări Hotel (C#)</h3>
+        <pre><code>using System;
+
+namespace GestiuneHotel
+{
+    class Rezervare
+    {
+        public string NumeClient { get; set; }
+        public int NoptiCazare { get; set; }
+        public string TipCamera { get; set; } // "single", "double", "apartament"
+        public int NumarCameraAlocata { get; set; }
+
+        public Rezervare(string nume, int nopti, string tip)
+        {
+            NumeClient = nume;
+            NoptiCazare = nopti;
+            TipCamera = tip;
+            NumarCameraAlocata = -1; // -1 înseamnă nealocată înca
+        }
+    }
+
+    class Hotel
+    {
+        private string numeHotel;
+        private int stele;
+        private int totalCamere;
+        private bool[] camereOcupate;
+        private Rezervare[] listaRezervari;
+        private int nrRezervari;
+
+        public Hotel(string nume, int categorie, int capacitateCamere)
+        {
+            numeHotel = nume;
+            stele = categorie;
+            totalCamere = capacitateCamere;
+            camereOcupate = new bool[totalCamere + 1];
+            listaRezervari = new Rezervare[100];
+            nrRezervari = 0;
+        }
+
+        public void InregistreazaRezervare(string nume, int nopti, string tip)
+        {
+            Rezervare noua = new Rezervare(nume, nopti, tip);
+            AlocaCameraAutomat(noua);
+            listaRezervari[nrRezervari++] = noua;
+            Console.WriteLine($"[Succes] Rezervare adaugata pentru {nume}.");
+        }
+
+        private void AlocaCameraAutomat(Rezervare r)
+        {
+            // Strategie simplă de alocare camere:
+            // Camerele 1-5: single, 6-15: double, 16+: apartamente
+            int start = 1, finall = totalCamere;
+            if (r.TipCamera.Equals("single", StringComparison.OrdinalIgnoreCase)) finall = 5;
+            else if (r.TipCamera.Equals("double", StringComparison.OrdinalIgnoreCase)) { start = 6; finall = 15; }
+            else { start = 16; }
+
+            for (int i = start; i <= finall && i <= totalCamere; i++)
+            {
+                if (!camereOcupate[i])
+                {
+                    camereOcupate[i] = true;
+                    r.NumarCameraAlocata = i;
+                    return;
+                }
+            }
+        }
+
+        public void AnuleazaRezervare(string nume)
+        {
+            for (int i = 0; i < nrRezervari; i++)
+            {
+                if (listaRezervari[i].NumeClient.Equals(nume, StringComparison.OrdinalIgnoreCase))
+                {
+                    int cam = listaRezervari[i].NumarCameraAlocata;
+                    if (cam != -1) camereOcupate[cam] = false;
+
+                    // Ștergerea elementului din vector prin deplasare
+                    for (int j = i; j < nrRezervari - 1; j++) { listaRezervari[j] = listaRezervari[j + 1]; }
+                    nrRezervari--;
+                    Console.WriteLine($"[Anulare] Rezervarea clientului {nume} a fost anulata.");
+                    return;
+                }
+            }
+            Console.WriteLine("[Eroare] Rezervarea nu a fost gasita.");
+        }
+
+        public void ListareRezervari()
+        {
+            Console.WriteLine($"\n--- Rezervari active la Hotel {numeHotel} ({stele}*) ---");
+            for (int i = 0; i < nrRezervari; i++)
+            {
+                string statusCam = listaRezervari[i].NumarCameraAlocata == -1 ? "Fara camera" : "Camera " + listaRezervari[i].NumarCameraAlocata;
+                Console.WriteLine($"Client: {listaRezervari[i].NumeClient} | Durata: {listaRezervari[i].NoptiCazare} nopti | Tip: {listaRezervari[i].TipCamera} | Alocare: {statusCam}");
+            }
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Hotel h = new Hotel("Plaza", 4, 20);
+            h.InregistreazaRezervare("Dmitrieva Irina", 3, "double");
+            h.InregistreazaRezervare("Popescu Ion", 5, "single");
+            
+            h.ListareRezervari();
+            
+            h.AnuleazaRezervare("Popescu Ion");
+            h.ListareRezervari();
+
+            Console.ReadLine();
+        }
+    }
+}</code></pre>
+
+        <h3>8. Problemă Suplimentară: Parc Auto (C++)</h3>
+        <p><em>vehicul.h</em></p>
+        <pre><code>#ifndef VEHICUL_H
+#define VEHICUL_H
+
+class Vehicul {
+protected:
+    char *marca;
+    char numar_inmatriculare[15];
+    double consum_baza;
+
+public:
+    Vehicul(const char* m, const char* nr, double consum);
+    virtual void afisare();
+    virtual double calcul_consum(double distanta);
+    virtual ~Vehicul();
+};
+
+#endif</code></pre>
+        <p><em>TipuriVehicule.h</em></p>
+        <pre><code>#ifndef TIPURIVEHICULE_H
+#define TIPURIVEHICULE_H
+
+#include "Vehicul.h"
+
+class Masina : public Vehicul {
+private:
+    bool AC;
+
+public:
+    Masina(const char* m, const char* nr, double consum, bool ac_pornit);
+    void afisare() override;
+    double calcul_consum(double distanta) override;
+};
+
+class Scuter : public Vehicul {
+private:
+    int volum_cutie;
+
+public:
+    Scuter(const char* m, const char* nr, double consum, int volum);
+    void afisare() override;
+    double calcul_consum(double distanta) override;
+};
+
+#endif</code></pre>
+        <p><em>ParcAuto.h</em></p>
+        <pre><code>#ifndef PARCAUTO_H
+#define PARCAUTO_H
+
+#include "Vehicul.h"
+
+struct Nod {
+    Vehicul *v;
+    Nod *next;
+    Nod(Vehicul *vehicul);
+    ~Nod();
+};
+
+class ParcAuto {
+private:
+    Nod *cap;
+
+public:
+    ParcAuto();
+    void adaugare_vehicul(Vehicul *nou);
+    void afisare_toate();
+    double calcul_combustibil_total(double distanta);
+    ~ParcAuto();
+};
+
+#endif</code></pre>
+        <p><em>main.cpp</em></p>
+        <pre><code>#include "Vehicul.h"
+#include "TipuriVehicule.h"
+#include "ParcAuto.h"
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+Vehicul::Vehicul(const char* m, const char* nr, double consum) {
+    marca = new char[strlen(m) + 1];
+    strcpy(marca, m);
+    strcpy(numar_inmatriculare, nr);
+    consum_baza = consum;
+}
+
+void Vehicul::afisare() {
+    cout << "Marca: " << marca << " | Nr: " << numar_inmatriculare << " | Consum de baza: " << consum_baza << "L/100km";
+}
+
+double Vehicul::calcul_consum(double distanta) {
+    return (distanta * consum_baza) / 100.0;
+}
+
+Vehicul::~Vehicul() {
+    delete[] marca;
+}
+
+Masina::Masina(const char* m, const char* nr, double consum, bool ac_pornit) 
+    : Vehicul(m, nr, consum), AC(ac_pornit) {}
+
+void Masina::afisare() {
+    Vehicul::afisare();
+    cout << " | Tip: Masina | AC: " << (AC ? "Pornit (+1.5 L/100km)" : "Oprit") << endl;
+}
+
+double Masina::calcul_consum(double distanta) {
+    double consum_real = consum_baza;
+    if (AC) {
+        consum_real += 1.5;
+    }
+    return (distanta * consum_real) / 100.0;
+}
+
+Scuter::Scuter(const char* m, const char* nr, double consum, int volum) 
+    : Vehicul(m, nr, consum), volum_cutie(volum) {}
+
+void Scuter::afisare() {
+    Vehicul::afisare();
+    cout << " | Tip: Scuter | Cutie bagaje: " << volum_cutie << " litri" << endl;
+}
+
+double Scuter::calcul_consum(double distanta) {
+    return Vehicul::calcul_consum(distanta);
+}
+
+Nod::Nod(Vehicul *vehicul) {
+    v = vehicul;
+    next = nullptr;
+}
+
+Nod::~Nod() {
+    delete v;
+}
+
+ParcAuto::ParcAuto() {
+    cap = nullptr;
+}
+
+void ParcAuto::adaugare_vehicul(Vehicul *nou) {
+    Nod *nod_nou = new Nod(nou);
+    nod_nou->next = cap;
+    cap = nod_nou;
+}
+
+void ParcAuto::afisare_toate() {
+    Nod *temp = cap;
+    while (temp != nullptr) {
+        temp->v->afisare();
+        temp = temp->next;
+    }
+}
+
+double ParcAuto::calcul_combustibil_total(double distanta) {
+    double total_litri = 0;
+    Nod *temp = cap;
+    while (temp != nullptr) {
+        total_litri += temp->v->calcul_consum(distanta);
+        temp = temp->next;
+    }
+    return total_litri;
+}
+
+ParcAuto::~ParcAuto() {
+    while (cap != nullptr) {
+        Nod *temp = cap;
+        cap = cap->next;
+        delete temp;
+    }
+}
+
+int main() {
+    ParcAuto parc;
+
+    parc.adaugare_vehicul(new Masina("Dacia Logan", "CH 123 L", 6.5, true));
+    parc.adaugare_vehicul(new Masina("Toyota Prius", "CH 999 W", 4.5, false));
+    parc.adaugare_vehicul(new Scuter("Yamaha", "CH 45 Sc", 2.5, 50));
+    parc.adaugare_vehicul(new Scuter("Vespa", "CH 88 Xy", 3.0, 40));
+
+    cout << "--- TOATE VEHICULELE DIN PARCUL AUTO ---\n";
+    parc.afisare_toate();
+    cout << "----------------------------------------\n";
+
+    double distanta_simulata = 150.0;
+    double total_necesar = parc.calcul_combustibil_total(distanta_simulata);
+
+    cout << "\n[Raport]: Pentru o distanta de " << distanta_simulata << " km parcursa de FIECARE vehicul,\n";
+    cout << "Parcul auto va consuma in total: " << total_necesar << " litri de combustibil.\n";
+
+    return 0;
+}</code></pre>
+            </div>
+        </div>
+
+        </main>
+</body>
+</html>

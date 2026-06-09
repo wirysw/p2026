@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cap. 2 Unitatea de Învățare - Tehnica Greedy</title>
+    <link rel="stylesheet" href="css/style-unitate.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <nav class="main-nav">
+                <a href="index.html">Pagina Principală</a>
+                <a href="planificare.html">Cap. 1 Planificare</a>
+                <a href="unitate-invatare.html" class="active">Cap. 2 Unitatea de Învățare</a>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Cap. 3 Rezolvarea Problemei ▾</a>
+                    <div class="dropdown-content">
+                        <a href="problema-conditie.html">Condiția problemei 1</a>
+                        <a href="problema-implementare.html">Implementarea în C++</a>
+                        <a href="problema-rezultat.html">Rezultatul execuției</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        
+        <div class="header-section">
+            <span class="chapter-label">Studiu Individual</span>
+            <h1 class="page-title">Capitolul 2. Tehnica Greedy (Algoritmii Lacomi)</h1>
+            <p class="subtitle-page">Analiza teoretică, proprietăți structurale, strategii de aplicare și implementări practice în dezvoltarea software.</p>
+        </div>
+
+        <section class="info-section">
+            <h2>1. Introducere și Prezentarea Conceptului Teoretic</h2>
+            
+            <div class="card-gray spec-box">
+                <h3>Definiție</h3>
+                <p>Tehnica Greedy (Lacomă) este o paradigmă de proiectare a algoritmilor care rezolvă o problemă de optimizare luând decizii pas cu pas. La fiecare etapă, algoritmul alege opțiunea care pare cea mai bună (cea mai profitabilă sau cea mai ieftină) în momentul respectiv, sperând că prin acumularea acestor optimuri locale se va ajunge la optimul global (soluția ideală pentru întreaga problemă).</p>
+            </div>
+
+            <div class="card-white margin-top">
+                <h3>Noțiuni de bază și proprietăți structurale</h3>
+                <p>Majoritatea problemelor în care funcționează algoritmii greedy respectă cu strictețe aceste două proprietăți:</p>
+                <ul class="geometric-list">
+                    <li><strong>Proprietatea alegerii lacome (Greedy Choice Property):</strong> Această proprietate afirmă că alegerea celei mai bune opțiuni posibile la fiecare pas (optimul local) va duce la cea mai bună soluție generală (optimul global). Dacă acest lucru nu este adevărat, o abordare lacomă s-ar putea să nu funcționeze sau să returneze doar o aproximare.</li>
+                    <li><strong>Substructură optimă (Optimal Substructure):</strong> Aceasta înseamnă că puteți descompune problema în părți mai mici, iar rezolvarea acestor părți mai mici prin alegeri lacome ajută în mod direct la rezolvarea problemei generale. Soluția optimă a problemei mari conține în interiorul ei soluțiile optime ale subproblemelor.</li>
+                </ul>
+            </div>
+
+            <div class="card-white margin-top">
+                <h3>Rolul și importanța în programare</h3>
+                <p>În dezvoltarea software, tehnica Greedy este esențială deoarece transformă probleme extrem de complexe din punct de vedere computațional (care prin căutare completă sau Backtracking ar bloca procesorul) în soluții rapide și eficiente. Ea este utilizată masiv în rețelistică pentru rutarea datelor, în algoritmi de criptare și compresie, precum și pentru a obține o aproximare excelentă pentru problemele de optimizare dificile (NP-dificile).</p>
+                <div class="accent-box">
+                    <strong>Exemplu practic:</strong> În Problema Comisarului Ambulant, o alegere lacomă este de a alege pur și simplu cel mai apropiat oraș nevizitat la fiecare pas; deși nu produce întotdeauna traseul perfect absolut, oferă o soluție aproximativ optimă extrem de rapid.
+                </div>
+            </div>
+
+            <div class="card-white margin-top">
+                <h3>Caracteristici principale</h3>
+                <ul class="geometric-list blue-dots">
+                    <li><strong>Simplitate:</strong> Sunt algoritmi simpli și foarte ușor de implementat în practică.</li>
+                    <li><strong>Eficiență temporală:</strong> Sunt extrem de eficienți în ceea ce privește complexitatea timpului, oferind adesea soluții rapide. Sunt de obicei preferați în locul programării dinamice pentru problemele în care se aplică ambele (ex: problema jocului cu sărituri sau alegerea algoritmului Dijkstra în detrimentul lui Bellman-Ford atunci când nu avem ponderi negative).</li>
+                    <li><strong>Irevocabilitate:</strong> Acești algoritmi nu reconsideră și nu modifică niciodată alegerile anterioare. Ei iau decizii definitive pe baza informațiilor actuale, fără a privi în viitor și fără a analiza consecințele ulterioare.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>2. Modul de Utilizare, Avantaje și Dezavantaje</h2>
+            
+            <div class="grid-two-cols">
+                <div class="card-white">
+                    <h3>Cum identifici problemele specifice?</h3>
+                    <ul class="geometric-list">
+                        <li><strong>Verificarea descompunerii în subprobleme:</strong> Putem împărți problema în părți mai mici? Dacă da, și rezolvarea acelor părți ne ajută să rezolvăm problema principală, probabil avem o structură greedy. <br><small><em>Exemplu: În selecția activităților, după ce alegem o activitate, subproblema rămasă este de a alege activitățile care încep după ea.</em></small></li>
+                        <li><strong>Validarea alegerii locale:</strong> Alegerea celei mai bune opțiuni la fiecare pas va duce la cea mai bună soluție generală? Dacă da, algoritmul greedy este corect. <br><small><em>Exemplu: În Dijkstra, alegerea muchiei cu cost minim garantează drumul minim final.</em></small></li>
+                    </ul>
+                </div>
+
+                <div class="card-white">
+                    <h3>Diferența dintre Programarea Lacomă și cea Dinamică</h3>
+                    <ul class="geometric-list">
+                        <li><strong>Proprietatea alegerilor:</strong> Algoritmul Greedy funcționează atunci când problema are proprietatea de alegere Greedy și o substructură optimă. Programarea dinamică funcționează și ea când o problemă are substructură optimă, dar necesită în plus existența unor subprobleme suprapuse.</li>
+                        <li><strong>Dependența deciziilor:</strong> În algoritmul greedy, fiecare decizie locală luată pe moment duce direct la o soluție optimă, în timp ce în programarea dinamică soluția depinde de rezolvarea anterioară a tuturor subproblemelor, decizia finală fiind luată prin compararea rezultatelor acestora.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>3. Descrierea Detaliată a Situațiilor Practice de Aplicare</h2>
+            
+            <div class="card-gray method-block">
+                <span class="method-tag">Metoda 1</span>
+                <h3>Strategii bazate pe Sortare</h3>
+                <p class="method-intro">În aceste probleme, primul pas obligatoriu este ordonarea datelor conform unui criteriu matematic bine stabilit, pentru ca apoi parcurgerea vectorului să se facă liniar, luând decizii definitive.</p>
+                
+                <div class="sub-method">
+                    <h4>Secvențierea lucrărilor (Job Scheduling)</h4>
+                    <p><strong>Strategia:</strong> Pentru a maximiza profiturile totale într-un sistem în care fiecare job are un termen limită (deadline) și un profit, prioritizăm lucrările cu profituri mai mari.</p>
+                    <p><strong>Mecanism:</strong> Sortăm toate lucrările în ordine descrescătoare în funcție de profitul adus. Apoi, pentru fiecare lucrare în parte, încercăm să o programăm în timp cât mai târziu posibil în cadrul termenului său limită, pentru a lăsa libere sloturile de timp anterioare pentru alte lucrări cu termene mai apropiate.</p>
+                </div>
+
+                <div class="sub-method">
+                    <h4>Selectarea activităților</h4>
+                    <p><strong>Strategia:</strong> Maximizarea numărului total de activități care nu se suprapun pe o singură resursă. Se acordă prioritate activităților care se termină mai devreme.</p>
+                    <p><strong>Mecanism:</strong> Sortăm activitățile în funcție de ora lor de încheiere, în ordine crescătoare. Selectăm prima activitate, iar apoi adăugăm doar acele activități ulterioare care încep după încheierea celei selectate precedent.</p>
+                </div>
+
+                <div class="sub-method">
+                    <h4>Intervale disjuncte</h4>
+                    <p><strong>Strategia și Mecanism:</strong> Sortăm intervalele în funcție de momentul lor de început sau de sfârșit în ordine crescătoare. Selectăm primul interval valid și continuăm să le adunăm doar pe următoarele care încep strict după ce se termină cel precedent, eliminând instantaneu intervalele care se suprapun.</p>
+                </div>
+
+                <div class="sub-method">
+                    <h4>Rucsacul fracționar</h4>
+                    <p><strong>Strategia:</strong> Obiectele pot fi tăiate sau fracționate pentru a umple un rucsac de capacitate limitată, obținând valoarea maximă.</p>
+                    <p><strong>Mecanism:</strong> Calculăm raportul valoare/greutate pentru fiecare articol și le sortăm descrescător. Luăm complet sau fracționat articolul cu cel mai mare raport disponibil.</p>
+                </div>
+
+                <div class="sub-method">
+                    <h4>Algoritmul Kruskal (Arborele Parțial Minim - MST)</h4>
+                    <p><strong>Strategia:</strong> Unirea tuturor nodurilor unui graf ponderat cu un cost total minim, prioritizând muchiile cele mai mici.</p>
+                    <p><strong>Mecanism:</strong> Sortăm muchiile crescător după pondere. Le adăugăm iterativ în arborele final, asigurându-ne că nu formăm cicluri în graf.</p>
+                </div>
+            </div>
+
+            <div class="card-gray method-block margin-top">
+                <span class="method-tag">Metoda 2</span>
+                <h3>Strategii bazate pe Cozi de Prioritate sau Grămezi (Heaps)</h3>
+                <p class="method-intro">Atunci când setul de date se modifică dinamic în timpul rulării, sortarea simplă nu mai este eficientă. Se folosește o structură de tip Heap (Min-Heap) care menține în vârf cel mai mic element în timp real.</p>
+
+                <div class="sub-method">
+                    <h4>Algoritmul Dijkstra (Drumuri Minime)</h4>
+                    <p><strong>Mecanism:</strong> Introducem nodurile într-o coadă de prioritate minimă (Min-Heap). În fiecare iterație, extragem nodul cu distanța minimă curentă din coadă și îi actualizăm vecinii dacă descoperim o cale mai scurtă prin el.</p>
+                </div>
+
+                <div class="sub-method">
+                    <h4>Conectarea a N frânghii</h4>
+                    <p><strong>Strategia:</strong> Costul unirii a două frânghii este egal cu suma lungimilor lor. Strategia greedy este de a conecta întotdeauna cele mai mici două frânghii la fiecare pas pentru a reduce costul final acumulativ.</p>
+                    <p><strong>Mecanism:</strong> Extragem cele mai mici două lungimi din Min-Heap, le adunăm, adăugăm costul la total și inserăm suma înapoi în Heap până când rămâne o singură frânghie.</p>
+                </div>
+
+                <div class="sub-method">
+                    <h4>Codificarea Huffman (Compresia Datelor)</h4>
+                    <p><strong>Mecanism:</strong> Creăm un Min-Heap ordonat după frecvența de apariție a caracterelor. Combinăm iterativ cele mai puțin frecvente două noduri într-un nod nou părinte până când obținem rădăcina arborelui de criptare.</p>
+                </div>
+            </div>
+
+            <div class="card-gray method-block margin-top">
+                <span class="method-tag">Metoda 3</span>
+                <h3>Strategii Arbitrare / Ad-hoc</h3>
+                <p class="method-intro">Probleme de optimizare bazate pe parcurgerea unei structuri unde decizia optimă poate fi calculată direct prin variabile de stare, fără a fi nevoie de sortări explicite sau structuri complexe.</p>
+
+                <div class="sub-method">
+                    <h4>Numărul minim de salturi (Jump Game)</h4>
+                    <p><strong>Mecanism:</strong> Pe măsură ce parcurgem vectorul, stocăm poziția maximă absolută accesibilă în intervalul saltului curent. Incrementăm contorul de salturi doar când am traversat complet intervalul de salt curent.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>4. Exemple Practice și Fragmente de Cod</h2>
+
+
+            <div class="card-white">
+                <h3>Exemplul 1: Problema Restului de Monede (Găsirea Limitelor Greedy)</h3>
+                <p><strong>Scenariul Optim:</strong> Restul pentru suma 39 folosind monede de [1, 2, 5, 10]. Algoritmul alege cea mai mare monedă posibilă la fiecare pas: Ia 10 (rămân 29) → Ia 10 (rămân 19) → Ia 10 (rămân 9) → Ia 5 (rămân 4) → Ia 2 (rămân 2) → Ia 2 (rămân 0). Total: 6 monede (Optim global).</p>
+                <p><strong>Contraexemplul (Unde Greedy eșuează):</strong> Monedele [18, 1, 10] și suma țintă 20. Abordarea Greedy alege moneda de 18, apoi două monede de 1. Total: 3 monede. Soluția reală optimă: Două monede de 10 (Total: 2 monede).</p>
+
+<pre><code><span class="code-comment">// Cod C++ pentru Problema Restului</span>
+#include &lt;iostream&gt;
+using namespace std;
+
+void sorteazaMonede(int coins[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (coins[j] > coins[j + 1]) {
+                int temp = coins[j];
+                coins[j] = coins[j + 1];
+                coins[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int minCoins(int coins[], int n, int amount) {
+    sorteazaMonede(coins, n);
+    int res = 0;
+  
+    for(int i = n - 1; i >= 0; i--) {
+        if(amount >= coins[i]) {
+            int cnt = (amount / coins[i]);
+            res += cnt;
+            amount -= (cnt * coins[i]);
+        }
+        if(amount == 0) break;
+    }
+    
+    if (amount > 0) return -1;
+    return res;
+}
+
+int main() {
+    int coins[] = {5, 2, 10, 1};
+    int n = sizeof(coins) / sizeof(coins[0]);
+    int amount = 39;
+  
+    cout << "Numar minim de monede: " << minCoins(coins, n, amount);
+    return 0;
+}</code></pre>
+
+                <div class="explanation-box">
+                    <h5>Explicația funcționării codului (Problema Restului)</h5>
+                    <p>Deoarece tehnica implică alegeri ordonate, sortăm tabloul crescător cu Bubble Sort pentru a avea valorile mari la final. Parcurgem vectorul în sens invers, de la ultimul index spre zero. Pentru a optimiza timpul, utilizăm diviziunea întreagă pentru a afla instant numărul maxim de monede de același tip utilizabile (<code>amount / coins[i]</code>), scăzând valoarea totală direct din sumă. Bucla se oprește la finalizarea sumei sau returnează -1 dacă valoarea nu poate fi formată exact.</p>
+                </div>
+            </div>
+
+            <div class="card-white margin-top">
+                <h3>Exemplul 2: Problema Rucsacului Fracționar</h3>
+                <p><strong>Enunț:</strong> Avem obiecte cu anumite valori și greutăți și un rucsac de capacitate limitată (ex: W = 50). Putem fracționa obiectele pentru a maximiza valoarea totală.</p>
+                <p><strong>De ce eșuează abordările naive?</strong> Sortarea doar după greutate minimă sau doar după valoare maximă poate duce la omiterea elementelor cu un raport optim profit/kilogram, de aceea criteriul stabil al metodei este densitatea valorică.</p>
+
+<pre><code><span class="code-comment">// Cod C++ pentru Rucsacul Fracționar</span>
+#include &lt;iostream&gt;
+using namespace std;
+
+struct Item {
+    int valoare;
+    int greutate;
+};
+
+void sorteazaElemente(Item items[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            double r1 = (1.0 * items[j].valoare) / items[j].greutate;
+            double r2 = (1.0 * items[j + 1].valoare) / items[j + 1].greutate;
+            if (r1 < r2) {
+                Item temp = items[j];
+                items[j] = items[j + 1];
+                items[j + 1] = temp;
+            }
+        }
+    }
+}
+
+double fractionalKnapsack(int val[], int wt[], int n, int capacitate) {
+    Item items[100];
+    for (int i = 0; i < n; i++) {
+        items[i].valoare = val[i];
+        items[i].greutate = wt[i];
+    }
+    
+    sorteazaElemente(items, n);
+    double res = 0.0;
+    int capacitateCurenta = capacitate;
+    
+    for (int i = 0; i < n; i++) {
+        if (items[i].greutate <= capacitateCurenta) {
+            res += items[i].valoare;
+            capacitateCurenta -= items[i].greutate;
+        } else {
+            res += ((1.0 * items[i].valoare) / items[i].greutate) * capacitateCurenta;
+            break;
+        }
+    }
+    return res;
+}
+
+int main() {
+    int val[] = {60, 100, 120};  
+    int wt[] = {10, 20, 30};
+    int capacitate = 50;
+    int n = sizeof(val) / sizeof(val[0]);
+    
+    cout << "Valoarea maxima in rucsac: " << fractionalKnapsack(val, wt, n, capacitate);
+    return 0;
+}</code></pre>
+
+                <div class="explanation-box">
+                    <h5>Explicația funcționării codului (Rucsacul Fracționar)</h5>
+                    <p>Grupăm datele într-o structură <code>Item</code> pentru a păstra legătura dintre valoare și masă. Sortăm descrescător elementele în funcție de raportul lor valoric unitar transformat în real (<code>double</code>). În bucla principală, încărcăm obiectele întregi în limita spațiului disponibil, iar în momentul în care un obiect depășește capacitatea rămasă, extragem doar fracțiunea exactă necesară umplerii complete și sistăm procesul prin <code>break</code>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>5. Concluzii și Observații Personale</h2>
+            <div class="card-gray text-layout">
+                <p><strong>Capcana criteriului de sortare:</strong> Cea mai mare dificultate în implementarea tehnicii Greedy este descoperirea criteriului matematic corect de selectare a obiectelor. O alegere greșită compromite întreaga logică a aplicației.</p>
+                <p><strong>Lipsa corectitudinii universale:</strong> Este dificil să demonstrezi matematic dacă un algoritm Greedy va funcționa pe orice set de date de intrare, motiv pentru care testarea cu cazuri de graniță (edge cases) este obligatorie.</p>
+                <p><strong>Importanța subiectului:</strong> Chiar dacă are limitări, oferă o viteză de execuție de neegalat pentru sisteme în timp real (rutarea pachetelor, compresia fișierelor). Înțelegerea sa dezvoltă gândirea algoritmică și ne învață să facem un compromis inteligent (trade-off) între timpul de rulare și precizia absolută a unei soluții.</p>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>6. Bibliografie / Surse</h2>
+            <div class="card-white file-box">
+                <ul class="geometric-list blue-dots">
+                    <li>Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. – <em>Introduction to Algorithms</em> (Introducere în Algoritmi).</li>
+                    <li>GeeksforGeeks Portal – <em>Greedy Algorithms Data Structures & Paradigms</em>.</li>
+                    <li>Note de curs – <em>Analiza Algoritmilor și Tehnici de Optimizare</em>.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        let slideIndex = 0;
+        showSlides(slideIndex);
+
+        function moveSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("carousel-slide");
+            let dots = document.getElementsByClassName("dot");
+            
+            if (n >= slides.length) { slideIndex = 0; }
+            if (n < 0) { slideIndex = slides.length - 1; }
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
+            }
+            
+            slides[slideIndex].classList.add("active");
+            dots[slideIndex].classList.add("active");
+        }
+    </script>
+
+</body>
+</html>

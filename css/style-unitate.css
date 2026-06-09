@@ -1,0 +1,389 @@
+:root {
+    --bg-color: #f3f4f6;
+    --card-bg: #ffffff;
+    --text-main: #1f2937;
+    --text-muted: #4b5563;
+    --accent-blue: #0044ff;
+    --border-radius: 20px;
+    --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    font-family: var(--font-stack);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid #e5e7eb;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.main-nav a, .dropbtn {
+    color: #4b5563;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.main-nav a:hover, .main-nav a.active, .dropdown:hover .dropbtn {
+    color: #000000;
+    border-bottom: 3px solid var(--accent-blue);
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--card-bg);
+    min-width: 220px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    top: 40px;
+}
+
+.dropdown-content a {
+    color: var(--text-main);
+    padding: 12px 16px;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--bg-color);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Structură Conținut */
+.content-wrapper {
+    max-width: 950px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.header-section {
+    margin-bottom: 40px;
+}
+
+.chapter-label {
+    background-color: var(--accent-blue);
+    color: white;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.page-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #111111;
+    margin: 0 0 10px 0;
+}
+
+.subtitle-page {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.info-section {
+    margin-bottom: 45px;
+}
+
+.info-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111111;
+    border-bottom: 1px solid #d1d5db;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+/* Carduri */
+.card-white {
+    background-color: var(--card-bg);
+    border: 1px solid #e5e7eb;
+    border-radius: var(--border-radius);
+    padding: 25px;
+}
+
+.card-gray {
+    background-color: #eaeaea;
+    border: 1px solid #d1d5db;
+    border-radius: var(--border-radius);
+    padding: 25px;
+}
+
+.margin-top {
+    margin-top: 20px;
+}
+
+.grid-two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Liste geometrice sigure */
+.geometric-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0 0;
+}
+
+.geometric-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+
+.geometric-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    background-color: #111111;
+    border-radius: 50%;
+}
+
+.blue-dots li::before {
+    background-color: var(--accent-blue);
+}
+
+/* Zone text speciale */
+.accent-box {
+    margin-top: 15px;
+    border-left: 4px solid var(--accent-blue);
+    padding-left: 15px;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Stiluri specifice Metodelor */
+.method-block {
+    position: relative;
+    padding-top: 35px;
+}
+
+.method-tag {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+.method-intro {
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.sub-method {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #e5e7eb;
+}
+
+.sub-method h4 {
+    margin: 0 0 8px 0;
+    color: var(--accent-blue);
+    font-size: 16px;
+}
+
+.sub-method p {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+}
+
+.sub-method p:last-child {
+    margin-bottom: 0;
+}
+
+/* Zone afișare Cod */
+pre {
+    background-color: #111111;
+    color: #f3f4f6;
+    padding: 20px;
+    border-radius: 12px;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    margin: 20px 0;
+}
+
+.code-comment {
+    color: #6b7280;
+    font-style: italic;
+}
+
+.explanation-box {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-top: 15px;
+}
+
+.explanation-box h5 {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+    color: #111111;
+}
+
+.explanation-box p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* ================= CARUSEL (TIMELINE / SCHEME VIZUALE) ================= */
+.carousel-container {
+    background: #0d0d0d;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    position: relative;
+    color: white;
+}
+
+.carousel-title {
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+    border-left: 3px solid var(--accent-blue);
+    padding-left: 10px;
+}
+
+.carousel-wrapper {
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+}
+
+.carousel-slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.carousel-slide.active {
+    display: flex;
+}
+
+/* Spațiul geometric unde vei înlocui imaginile */
+.image-mock {
+    width: 100%;
+    height: 180px;
+    background: #1a1a1a;
+    border: 1px dashed #374151;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4b5563;
+    font-size: 14px;
+}
+
+.slide-caption {
+    font-size: 14px;
+    color: #9ca3af;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Butoane Navigație Carusel */
+.carousel-btn {
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background 0.2s;
+}
+
+.carousel-btn:hover {
+    background: var(--accent-blue);
+}
+
+.prev-btn { left: 45px; }
+.next-btn { right: 45px; }
+
+/* Puncte Indicatoare */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: #374151;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dot.active {
+    background: var(--accent-blue);
+    width: 20px;
+    border-radius: 4px;
+}
+
+/* Responsivitate */
+@media (max-width: 768px) {
+    .grid-two-cols {
+        grid-template-columns: 1fr;
+    }
+    .carousel-btn {
+        padding: 8px 12px;
+    }
+    .prev-btn { left: 15px; }
+    .next-btn { right: 15px; }
+}

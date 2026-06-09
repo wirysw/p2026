@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cap. 3 - Condiția Problemelor</title>
+    <link rel="stylesheet" href="css/style-index.css">
+    <link rel="stylesheet" href="css/style-probleme.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <nav class="main-nav">
+                <a href="index.html">Pagina Principală</a>
+                <a href="planificare.html">Cap. 1 Planificare</a>
+                <a href="unitate-invatare.html">Cap. 2 Unitatea de Învățare</a>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn active">Cap. 3 Rezolvarea Problemei ▾</a>
+                    <div class="dropdown-content">
+                        <a href="problema-conditie.html" class="active">Condiția problemei</a>
+                        <a href="problema-implementare.html">Implementarea în C++/C#</a>
+                        <a href="problema-rezultat.html">Rezultatul execuției</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <h1>Cap. 3 Rezolvarea Problemei - Condiții de Enunț</h1>
+        <p style="color:#6b7280; margin-bottom: 40px;">Mai jos sunt catalogate enunțurile tehnice detaliate pentru toate cele 11 probleme rezolvate în cadrul stagiului de practică (8 probleme de Tehnici de Programare în C++, 2 probleme de POO în C# și Problema Suplimentară Modulară).</p>
+
+        <h2 style="border-bottom: 2px solid #111; padding-bottom: 10px; margin-top: 50px; color:#111;">I. Tehnici de Programare (C++)</h2>
+
+        <div class="problem-card">
+            <div class="problem-badge">Problema m1.7</div>
+            <h2 class="problem-title">Ecuația Bazei de Numerație</h2>
+            <div class="problem-statement">
+                În notația (a)x litera x reprezintă baza sistemului de numerație, iar litera a - un număr scris în sistemul respectiv. Elaborați un program care calculează, dacă există, cel puțin o rădăcină a ecuației (a)x = b, unde a și b sunt numere naturale, iar x este necunoscuta. Fiecare cifră a numărului natural a aparține mulțimii {0, 1,2, ..., 9}, iar numărul b este scris în sistemul zecimal.
+                <br><br>
+                <strong>Exemplu:</strong> rădăcina ecuației (160)x = 122 este x=8, iar ecuația (5)x=10 nu are soluții. Estimați complexitatea temporală a programului elaborat.
+            </div>
+        </div>
+
+        <div class="problem-card">
+            <div class="problem-badge">Problema M2.11</div>
+            <h2 class="problem-title">Stații. (Metoda Greedy)</h2>
+            <div class="problem-statement">
+                Patronul unei companii private de transport în comun a primit de la primăria orașului aprobarea de a putea folosi o parte din stațiile Regiei Locale de Transport în Comun. Stațiile disponibile sunt situate de-a lungul arterei principale a orașului. El se hotărăște să introducă o cursă rapidă care să străbată orașul, de la un capăt la celălalt, pe artera principală. Pentru început se ocupă de stațiile situate de aceeași parte a drumului. Patronul are o dilemă: dacă opririle vor fi prea dese, atunci străbaterea orașului va dura prea mult și va plictisi călătorii, iar dacă stațiile sunt prea rare, călătorii vor fi prea putini. De aceea, criteriile după care patronul stabilește stațiile în care va opri cursa rapidă sunt:
+                <br>- Între două stații alăturate să fie cel puțin x metri.
+                <br>- Numărul total de stații să fie maxim.
+                <br><br>
+                Ajutați patronul să aleagă stațiile!
+                <br><br>
+                <strong>Date de intrare:</strong> Vom considera stațiile situate pe aceeași parte a arterei principale numerotate în ordine, dintr-un capăt până în celălalt cu 1, 2, ..., n. Prima linie a fișierului de intrare <code>date.in</code> conține un număr natural n, reprezentând numărul de stații situate pe artera principală. Următoarea linie conține n – 1 numere întregi ai, i = 1, 2, ..., n – 1 cu semnificația: ai este distanța dintre stația i și stația i + 1. Aceste numere vor fi separate prin câte un spațiu.
+                <br><br>
+                <strong>Date de ieșire:</strong> Fișierul de ieșire <code>date.out</code> va conține două linii. Pe prima linie se va scrie un număr întreg k care reprezintă numărul maxim de stații alese de patron, iar pe a doua linie se vor afla k numere, reprezentând numerele de ordine ale acestor stații. Numerele vor fi scrise în ordine crescătoare.
+                <br><br>
+                <strong>Restricții și precizări:</strong>
+                <br>- 1 ≤ n ≤ 1000;
+                <br>- 1 ≤ ai ≤ 2000, i = 1, 2, ..., n – 1;
+                <br>- 1 ≤ k ≤ 1000;
+                <br>- Dacă există mai multe soluții, în fișier se va scrie una singură.
+            </div>
+        </div>
+
+        <div class="problem-card">
+            <div class="problem-badge">Problema M3.11</div>
+            <h2 class="problem-title">Partițiile unui Număr Natural (Backtracking)</h2>
+            <div class="problem-statement">
+                Fie n>0, natural. Să se scrie un program care să afișeze toate partițiile unui număr natural n. Numim partiție a unui număr natural nenul n o mulțime de numere naturale nenule {p1, p2, ..., pk} care îndeplinesc condiția p1+p2+ ...+pk = n.
+                <br><br>
+                <strong>Exemplu:</strong> pentru n = 4 programul va afișa:
+                <br>4 = 1+1+1+1
+                <br>4 = 1+1+2
+                <br>4 = 1+3
+                <br>4 = 2+2
+                <br>4 = 4
+            </div>
+        </div>
+
+        <div class="problem-card">
+            <div class="problem-badge">Problema M3.29</div>
+            <h2 class="problem-title">Canibalii și Misionarii (Backtracking)</h2>
+            <div class="problem-statement">
+                Pe malul unei ape se găsesc c canibali și m misionari. Ei urmează să treacă apa și au la dispoziție o barcă cu 2 locuri. Se știe că, dacă atât pe un mal, cât și pe celălalt avem mai mulți canibali decât misionari, misionarii sunt mâncați de canibali. Se cere să se scrie un program care să furnizeze toate soluțiile de trecere a apei, astfel încât să nu fie mâncat nici un misionar.
+            </div>
+        </div>
+
+        <div class="problem-card">
+            <div class="problem-badge">Problema M4.11</div>
+            <h2 class="problem-title">Generarea Permutărilor unei Mulțimi</h2>
+            <div class="problem-statement">
+                Se citește un număr natural n și apoi o mulțime cu n elemente numere naturale. Folosind interschimbări de elemente generați și afișați permutările mulțimii citite.
+            </div>
+        </div>
+
+        <div class="problem-card">
+            <div class="problem-badge">Problema M5.15</div>
+            <h2 class="problem-title">Suma Elementelor unui Vector (Divide et Impera)</h2>
+            <div class="problem-statement">
+                Se citește un vector cu n elemente numere naturale. Să se calculeze suma elementelor vectorului folosind divide et impera.
+            </div>
+        </div>
+
+        <div class="problem-card">
+            <div class="problem-badge">Problema M6.11</div>
+            <h2 class="problem-title">Suma Maximă în Triunghi (Programare Dinamică)</h2>
+            <div class="problem-statement">
+                Se dau n(n+1)/2 numere naturale aranjate într-un triunghi format din elementele de sub și de pe diagonala unei matrici pătratice de ordin n.
+                Se calculează sume pornind din elementul de pe prima linie prin deplasări în vecinii de sub și din dreapta. Găsiți suma maximă care se poate calcula astfel și care sunt valorile din care se obține suma maximă.
+                <br><br>
+                <strong>Exemplu:</strong>
+                <br>n=4
+                <br>2
+                <br>3 5
+                <br>6 3 4
+                <br>5 6 1 4
+                <br>Suma maximă este 17 și se obține din valorile 2 3 6 6.
+            </div>
+        </div>
+
+        <div class="problem-card">
+            <div class="problem-badge">Problema M6.16</div>
+            <h2 class="problem-title">Subșir Crescător Maximal (Programare Dinamică)</h2>
+            <div class="problem-statement">
+                Subșir crescător maximal. Se citește un număr n și apoi un șir de n numere întregi. Găsiți cel mai lung subșir al șirului citit care are proprietatea că elementele sunt în ordine crescătoare.
+                Dacă există mai multe subșiruri de lungime maximă se va afișa unul dintre ele.
+                <br><br>
+                <strong>Exemplu:</strong>
+                <br><code>date.in</code>: 9 <br> 4 2 3 0 5 2 6 9 8
+                <br><code>date.out</code>: 2 3 5 6 9
+            </div>
+        </div>
+
+
+        <h2 style="border-bottom: 2px solid #111; padding-bottom: 10px; margin-top: 50px; color:#111;">II. Programare Orientată pe Obiecte (C#)</h2>
+
+        <div class="problem-card">
+            <div class="problem-badge">Problema POO 1</div>
+            <h2 class="problem-title">Evaluare Studenți și Gestiune Decanat</h2>
+            <div class="problem-statement">
+                Se cunosc informații despre studenții unui an de studiu și notele acestora la sfârșitul unui an de studiu. Să se scrie o aplicație care asistă secretariatul decanatului în evidența și activitatea sa:
+                <br>1. afișarea tuturor studenților;
+                <br>2. clasarea studenților absolvenți, respectiv repetentii;
+                <br>3. determinarea numarului de studenti care au media mai mare daca o medie data;
+                <br>4. ordonarea studentilor dupa medie;
+                <br>5. afisarea studentilor bursieri;
+                <br>6. clasarea studentilor dupa numarul de restante;
+                <br>7. ordonarea studentilor dupa nota de la o anumita materie.
+            </div>
+        </div>
+
+        <div class="problem-card">
+            <div class="problem-badge">Problema POO 2</div>
+            <h2 class="problem-title">Gestiunea Rezervărilor pentru un Hotel</h2>
+            <div class="problem-statement">
+                Să se realizeze un program care să permită gestiunea rezervărilor pentru un hotel. Despre hotel se cunosc următoarele informații: nume hotel; categoria; numărul de camere; pentru fiecare cameră numărul de paturi; numărul de apartamente; prețul pentru fiecare tip de cameră (single, double sau apartament). 
+                <br><br>Despre o persoană care dorește să rezerve o cameră se cunosc: numele persoanei care dorește o rezervare; perioada pentru care dorește rezervarea; tipul rezervării.
+                <br><br>
+                <strong>Operații cerute:</strong>
+                <br>1. rezervarea -> introducere de noi date;
+                <br>2. modificare -> modificarea datelor din fișier pentru o anumită rezervare;
+                <br>3. anulare -> anularea unei rezervări;
+                <br>4. alocare -> alocarea unei camere libere conform cu dorințele clientului;
+                <br>5. listare -> afișarea datelor existente.
+            </div>
+        </div>
+
+
+        <h2 style="border-bottom: 2px solid #111; padding-bottom: 10px; margin-top: 50px; color:#111;">III. Studiu de Caz / Problemă Suplimentară</h2>
+
+        <div class="problem-card">
+            <div class="problem-badge">Problemă Modulară</div>
+            <h2 class="problem-title">Gestiune Parc Auto „QuickDelivery”</h2>
+            <div class="problem-statement">
+                O firmă de livrări dorește un program pentru gestionarea vehiculelor din dotare. Compania folosește două tipuri de vehicule: Mașini (Autoturisme) și Scutere.
+                <br><br>
+                <strong>1. Cerințe pentru clase (Ierarhia):</strong>
+                <br><strong>Vehicul (Clasa de bază):</strong>
+                <br>- Date membre: <code>marca</code> (șir de caractere alocat dinamic), <code>numar_inmatriculare</code> (șir de caractere standard), <code>consum_baza</code> (litri/100km).
+                <br>- Metode: Constructor cu parametri, Destructor virtual, funcția <code>virtual void afisare()</code>, și funcția <code>virtual double calcul_consum(double distanta)</code> (calculează combustibilul consumat pentru o distanță în km).
+                <br><br>
+                <strong>Masina (Derivată din Vehicul):</strong>
+                <br>- Date membre: <code>aer_conditionat_pornit</code> (tip bool).
+                <br>- Metode: Suprascrie <code>calcul_consum()</code>. Dacă aerul condiționat este pornit, consumul crește cu 1.5 litri/100km față de cel de bază. Suprascrie <code>afisare()</code>.
+                <br><br>
+                <strong>Scuter (Derivată din Vehicul):</strong>
+                <br>- Date membre: <code>capacitate_cutie</code> (volumul în litri al cutiei de livrare).
+                <br>- Metode: Suprascrie <code>calcul_consum()</code>. Consumul unui scuter este mereu egal cu cel de bază, indiferent de alte condiții. Suprascrie <code>afisare()</code>.
+                <br><br>
+                <strong>2. Structura de Date (Gestiunea):</strong>
+                <br>- <strong>Nod:</strong> Structură sau clasă care conține un pointer către clasa de bază (<code>Vehicul *v</code>) și un pointer către următorul nod (<code>Nod *next</code>).
+                <br>- <strong>ParcAuto (Lista):</strong> O clasă care gestionează lista de vehicule și oferă metode pentru:
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;• <code>adaugare_vehicul(Vehicul *nou)</code>
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;• <code>afisare_toate()</code>
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;• <code>calcul_combustibil_total(double distanta)</code> – calculează câți litri de combustibil consumă toate vehiculele din listă dacă ar parcurge fiecare distanța respectivă.
+            </div>
+        </div>
+
+    </main>
+</body>
+</html>

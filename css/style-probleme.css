@@ -1,0 +1,118 @@
+:root {
+    --bg-color: #f3f4f6;
+    --card-bg: #ffffff;
+    --text-main: #1f2937;
+    --accent-blue: #0044ff;
+    --accent-dark: #111111;
+    --code-bg: #1e1e1e;
+    --border-radius: 16px;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+}
+
+.main-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.problem-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+}
+
+.problem-badge {
+    display: inline-block;
+    background-color: var(--accent-dark);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.problem-title {
+    margin: 0 0 15px 0;
+    font-size: 22px;
+    color: var(--accent-dark);
+}
+
+.problem-statement {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4b5563;
+    background: #f9fafb;
+    padding: 20px;
+    border-left: 4px solid var(--accent-blue);
+    border-radius: 0 8px 8px 0;
+}
+
+.complexity-box {
+    margin-top: 15px;
+    padding: 12px 15px;
+    background-color: #eff6ff;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1e40af;
+}
+
+/* Stil pentru afișarea codului */
+.code-wrapper {
+    background-color: var(--code-bg);
+    border-radius: 12px;
+    padding: 20px;
+    overflow-x: auto;
+    margin-top: 15px;
+    position: relative;
+}
+
+.code-wrapper pre {
+    margin: 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    color: #d4d4d4;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Containere pentru imagini (Console Output) */
+.console-screenshot-placeholder {
+    background-color: #1a1a1a;
+    border: 2px dashed #4b5563;
+    border-radius: 12px;
+    padding: 10px;
+    margin-top: 15px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.console-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+}
+
+.io-data {
+    font-family: monospace;
+    background: #f1f5f9;
+    padding: 10px 15px;
+    border-radius: 6px;
+    display: block;
+    margin-top: 10px;
+    color: #334155;
+    font-size: 13px;
+    border-left: 3px solid #64748b;
+}
